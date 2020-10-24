@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="text-center">Mon appi pour les appareils</h1>
+
+      <!-- Pipe pour la date -->
+      <p>Mis à jour : {{ lastUpdate | async | date: 'short' }}</p>
+
+        <ul class="list-group">
+          <app-appareil *ngFor="let appareil of appareils"
+          [appareilName]="appareil.name"
+          [appareilStatus]="appareil.status"></app-appareil>
+          
+        </ul>
+      <!-- Le btn sera désactivé si la variable isAuth est fausse.
+      On utilise [] pour lier à la propriété et les () pour créer une liaison à un évènement-->
+      <button class="btn btn-success" 
+              [disabled]="!isAuth"
+              (click)="onAllumer()">Tout allumer</button>
+    </div>
+  </div>
+</div>
