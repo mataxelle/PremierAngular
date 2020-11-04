@@ -1,26 +1,14 @@
+<!-- NavBar Bootstrap -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li routerLinkActive="active"><a routerLink="auth">Authentification</a></li>
+      <li routerLinkActive="active"><a routerLink="appareils">Appareils</a></li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
-      <h1 class="text-center">Mon appi pour les appareils</h1>
-
-      <!-- Pipe pour la date -->
-      <p>Mis à jour : {{ lastUpdate | async | date: 'short' }}</p>
-
-        <ul class="list-group">
-          <app-appareil *ngFor="let appareil of appareils; let i = index"
-          [appareilName]="appareil.name"
-          [appareilStatus]="appareil.status"
-          [index]="i"></app-appareil>
-          
-        </ul>
-      <!-- Le btn sera désactivé si la variable isAuth est fausse.
-      On utilise [] pour lier à la propriété et les () pour créer une liaison à un évènement-->
-      <button class="btn btn-success" 
-              [disabled]="!isAuth"
-              (click)="onAllumer()">Tout allumer</button>
-      <button class="btn btn-danger"
-              [disabled]="!isAuth"
-              (click)="onEteindre()">Tout éteindre</button>        
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>
