@@ -9,6 +9,7 @@ import { AppareilComponent } from './appareil/appareil.component';
 import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 import { AuthComponent } from './auth/auth.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
+import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
 // Routes
 import { Routes } from '@angular/router';
@@ -17,12 +18,15 @@ import { RouterModule } from '@angular/router';
 // Services
 import { AppareilService } from './services/appareil.service';
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/auth-guard.service';
 
 const appRoutes: Routes = [  // Création d'une const de type Routes importé depuis angular/router
-  { path: 'appareils', component: AppareilViewComponent},
-  { path: 'appareils/:id', component: SingleAppareilComponent},
+  { path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent},
+  { path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent},
   { path: 'auth', component: AuthComponent},
-  { path: '', component: AppareilViewComponent} // Le path vide correspond simplement à localhost:4200(racine de l'api)
+  { path: '', component: AppareilViewComponent}, // Le path vide correspond simplement à localhost:4200(racine de l'api)
+  { path: 'not-found', component: FourOhFourComponent},
+  { path: '**', redirectTo: '/not-found'}
 ];
 
 @NgModule({
@@ -32,7 +36,8 @@ const appRoutes: Routes = [  // Création d'une const de type Routes importé de
     AppareilComponent,
     AuthComponent,
     AppareilViewComponent,
-    SingleAppareilComponent
+    SingleAppareilComponent,
+    FourOhFourComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,8 @@ const appRoutes: Routes = [  // Création d'une const de type Routes importé de
   ],
   providers: [
     AppareilService,
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
