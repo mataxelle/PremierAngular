@@ -19,10 +19,12 @@ import { RouterModule } from '@angular/router';
 import { AppareilService } from './services/appareil.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
+import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
 
 const appRoutes: Routes = [  // Création d'une const de type Routes importé depuis angular/router
   { path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent},
   { path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent},
+  { path: 'edit-appareil', canActivate: [AuthGuard], component: EditAppareilComponent},
   { path: 'auth', component: AuthComponent},
   { path: '', component: AppareilViewComponent}, // Le path vide correspond simplement à localhost:4200(racine de l'api)
   { path: 'not-found', component: FourOhFourComponent},
@@ -37,7 +39,8 @@ const appRoutes: Routes = [  // Création d'une const de type Routes importé de
     AuthComponent,
     AppareilViewComponent,
     SingleAppareilComponent,
-    FourOhFourComponent
+    FourOhFourComponent,
+    EditAppareilComponent
   ],
   imports: [
     BrowserModule,

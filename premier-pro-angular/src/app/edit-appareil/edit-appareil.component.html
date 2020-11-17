@@ -1,0 +1,20 @@
+<div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm"> <!-- #f est une référence locale -->
+            <div class="form-group">
+                <label for="name">Nom de l'appareil</label>
+                <input type="text" id="name" class="form-control" name="name" ngModel required>
+            </div>
+            <div class="form-group">
+                <label for="status">Etat de l'appareil</label>
+                <select id="status" name="status" [ngModel]="defaultOnOff">
+                    <option value="allumé">Allumé</option>
+                    <option value="éteint">Éteint</option>
+                </select>
+            </div>
+            <!-- Intégré l'état de validation en liant la propriété disabled à la propriété invalid du form. 
+            Employé le ref locale f pour avoir accès à l'objet -->
+            <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Enregistrer</button>
+        </form>
+    </div>
+</div>
