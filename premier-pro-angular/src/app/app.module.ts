@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Afin de pouvoir utiliser le two-way binding (liaison à double sens (liaison par propriété et liaison par événement))
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Afin de pouvoir utiliser le two-way binding (liaison à double sens (liaison par propriété et liaison par événement))
 
 // Components
 import { AppComponent } from './app.component';
@@ -20,15 +20,20 @@ import { AppareilService } from './services/appareil.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
 import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
+import { UserService } from './services/user.service';
+import { UserListComponent } from './user-list/user-list.component';
+import { NewUserComponent } from './new-user/new-user.component';
 
 const appRoutes: Routes = [  // Création d'une const de type Routes importé depuis angular/router
-  { path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent},
-  { path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent},
-  { path: 'edit-appareil', canActivate: [AuthGuard], component: EditAppareilComponent},
-  { path: 'auth', component: AuthComponent},
-  { path: '', component: AppareilViewComponent}, // Le path vide correspond simplement à localhost:4200(racine de l'api)
-  { path: 'not-found', component: FourOhFourComponent},
-  { path: '**', redirectTo: '/not-found'}
+  { path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent },
+  { path: 'appareils/:id', canActivate: [AuthGuard], component: SingleAppareilComponent },
+  { path: 'edit-appareil', canActivate: [AuthGuard], component: EditAppareilComponent },
+  { path: 'auth', component: AuthComponent },
+  { path: 'users', component: UserListComponent },
+  { path: 'new-user', component: NewUserComponent },
+  { path: '', component: AppareilViewComponent }, // Le path vide correspond simplement à localhost:4200(racine de l'api)
+  { path: 'not-found', component: FourOhFourComponent },
+  { path: '**', redirectTo: '/not-found' }
 ];
 
 @NgModule({
@@ -40,17 +45,21 @@ const appRoutes: Routes = [  // Création d'une const de type Routes importé de
     AppareilViewComponent,
     SingleAppareilComponent,
     FourOhFourComponent,
-    EditAppareilComponent
+    EditAppareilComponent,
+    UserListComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes) // Cela dit au RouteurModule d'angular que toutes les routes enregistrées sont dans la const appRoutes
   ],
   providers: [
     AppareilService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
