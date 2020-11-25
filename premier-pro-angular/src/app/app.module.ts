@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Afin de pouvoir utiliser le two-way binding (liaison à double sens (liaison par propriété et liaison par événement))
+import { HttpClientModule } from '@angular/common/http';  //Créer et exécuter des appels HTTP (par Ajax)
 
 // Components
 import { AppComponent } from './app.component';
@@ -8,7 +9,10 @@ import { MonPremierComponent } from './mon-premier/mon-premier.component';
 import { AppareilComponent } from './appareil/appareil.component';
 import { SingleAppareilComponent } from './single-appareil/single-appareil.component';
 import { AuthComponent } from './auth/auth.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { NewUserComponent } from './new-user/new-user.component';
 import { AppareilViewComponent } from './appareil-view/appareil-view.component';
+import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
 
 // Routes
@@ -19,10 +23,7 @@ import { RouterModule } from '@angular/router';
 import { AppareilService } from './services/appareil.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth-guard.service';
-import { EditAppareilComponent } from './edit-appareil/edit-appareil.component';
 import { UserService } from './services/user.service';
-import { UserListComponent } from './user-list/user-list.component';
-import { NewUserComponent } from './new-user/new-user.component';
 
 const appRoutes: Routes = [  // Création d'une const de type Routes importé depuis angular/router
   { path: 'appareils', canActivate: [AuthGuard], component: AppareilViewComponent },
@@ -53,6 +54,7 @@ const appRoutes: Routes = [  // Création d'une const de type Routes importé de
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes) // Cela dit au RouteurModule d'angular que toutes les routes enregistrées sont dans la const appRoutes
   ],
   providers: [
